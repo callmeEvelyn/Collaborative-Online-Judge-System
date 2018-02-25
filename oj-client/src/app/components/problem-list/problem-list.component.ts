@@ -11,6 +11,7 @@ export class ProblemListComponent implements OnInit {
 
   problems: Problem[] = [];
   subscriptionProblems: Subscription;
+  title = 'Collaborate Online Judge System';
 
   constructor(@Inject("data") private data) { }
 
@@ -19,8 +20,7 @@ export class ProblemListComponent implements OnInit {
   }
 
   getProblems(): void {
-    this.subscriptionProblems = this.data.getProblems()
-                                                      .subscribe(problems => this.problems = problems);
+    this.subscriptionProblems = this.data.getProblems().subscribe(problems => this.problems = problems);
   }
 
 }

@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
 
   nickname = "";
 
-  title = "Online Judgement System";
+  title = "Collaborate Online Judge System";
 
   // searchBox: FormControl = new FormControl();
   subscription: Subscription;

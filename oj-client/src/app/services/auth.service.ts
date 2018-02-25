@@ -67,8 +67,6 @@ export class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
-
-
   //...
   public getProfile(cb): void {
     const accessToken = localStorage.getItem('access_token');

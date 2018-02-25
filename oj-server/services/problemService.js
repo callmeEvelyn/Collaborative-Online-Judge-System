@@ -45,4 +45,4 @@ module.exports = {
   getProblems: getProblems,
   getProblem: getProblem,
   addProblem: addProblem
-}
+};
