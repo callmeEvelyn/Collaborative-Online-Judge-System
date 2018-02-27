@@ -1,14 +1,14 @@
-import {Inject, Injectable} from '@angular/core';
-import {CanActivate, Router} from "@angular/router";
+import {Injectable, Inject} from '@angular/core';
+import {Router,CanActivate} from "@angular/router";
 
 @Injectable()
-export class AuthGuardService implements CanActivate{
+export class AuthGuardService implements  CanActivate {
 
   profile: any;
 
-  constructor(@Inject('auth') private auth, private router: Router) { }
+  constructor(@Inject("auth") private auth, private router: Router) { }
 
-  canActivate(): boolean {
+  canActivate(): boolean{
     if(this.auth.isAuthenticated()){
       return true;
     }else{
@@ -16,15 +16,15 @@ export class AuthGuardService implements CanActivate{
       return false;
     }
   }
-  isAdmin() : boolean {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-      });
-
-      if (this.auth.isAuthenticated() && this.auth.getProfile().roles.includes("Admin")){
-        return true;
-      }else{
-        return false;
-      }
-  }
+  // isAdmin() : boolean {
+  //     this.auth.getProfile((err, profile) => {
+  //       this.profile = profile;
+  //     });
+  //
+  //     if (this.auth.isAuthenticated() && this.auth.getProfile().roles.includes("Admin")){
+  //       return true;
+  //     }else{
+  //       return false;
+  //     }
+  // }
 }
