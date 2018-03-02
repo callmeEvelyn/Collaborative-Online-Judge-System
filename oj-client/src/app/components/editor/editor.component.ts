@@ -16,24 +16,27 @@ export class EditorComponent implements OnInit {
   language: string = 'Java';  //default
   sessionId: string;
 
-  defalutContent = {
-    'Java': `public class Solution {
-    public static void main(String[] args) {
-      // Type your Java code here
-    }
-}` ,
-    'C++': `#include <iostream>
-using namespace std;
+  output: string;
 
-int main() {
-  // Type your C++ code here
-  return 0;
-}`,
-    'Python': `class Solution:
-    def example():
-      # Write your Python code here`
-  };
+  defalutContent = {
+      'Java': `public class Solution {
+      public static void main(String[] args) {
+        // Type your Java code here
+      }
+  }`,
+      'C++': `#include <iostream>
+  using namespace std;
+  
+  int main() {
+    // Type your C++ code here
+    return 0;
+  }`,
+      'Python': `class Solution:
+      def example():
+        # Write your Python code here`
+    };
   constructor(@Inject('collaboration') private collaboration,
+              @Inject('data') private data,
               private route: ActivatedRoute) {
 
   }
@@ -87,10 +90,16 @@ int main() {
       this.editor.getSession().setMode('ace/mode/'+this.language.toLocaleLowerCase());
     }
     this.editor.setValue(this.defalutContent[this.language]);
+    this.output = '';
   }
 
   submit(): void {
     let userCode = this.editor.getValue();
-    console.log(userCode);
+    let editorData = {
+      user_code: userCode,
+      lang: this.language.toLowerCase()
+    };
+    this.data.buildAndRun(editorData)
+      .then( res => this.output = res.text);
   }
 }

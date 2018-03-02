@@ -31,4 +31,22 @@ router.post("/problems", jsonParser, function (req, res) {
         });
 });
 
+router.post("/build_and_run", jsonParser, function (req, res) {
+    const userCode = req.body.user_code;
+    const lang = req.body.lang;
+
+    console.log(lang + "; " + userCode);
+    rest_client.methods.build_and_run(
+        {
+        data: { code: userCode, lang: lang },
+        headers: { 'Content-Type': 'application/json' }
+    }, (data, response) => {
+    console.log("Received response from execution server: " + data['run']);
+    const text = `Build output: ${data['build']} Execute output: ${data['run']}`;
+    data['text'] = text;
+    res.json(data);
+}
+);
+});
+
 module.exports = router;
