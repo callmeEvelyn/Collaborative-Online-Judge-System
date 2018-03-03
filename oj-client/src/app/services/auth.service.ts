@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router,NavigationStart } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
+var CONFIG = require("./config.json")
 
 import 'rxjs/add/operator/filter';
 
@@ -10,12 +11,11 @@ import 'rxjs/add/operator/filter';
 export class AuthService {
 
   //authorilazation information, you may need you create an account on auth0 for this function
-  //noinspection TypeScriptUnresolvedFunction
   auth0 = new auth0.WebAuth({
-    clientID: 'ZiBFF599FK-onvQmlqAs9xvXy0TJiIzj',
-    domain: 'callmeevelyn.auth0.com',
+    clientID: CONFIG.clientID,
+    domain: CONFIG.domain,
     responseType: 'token id_token',
-    audience: 'https://callmeevelyn.auth0.com/userinfo',
+    audience: CONFIG.audience,
     redirectUri: 'http://localhost:3000',
     scope: 'openid profile email'
   });

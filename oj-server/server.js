@@ -5,12 +5,13 @@ var indexRouter = require("./routes/index");
 var mongoose = require("mongoose");
 var path = require("path");
 var http = require("http");
+var CONFIG = require("./config.json")
 
 var socket_io = require("socket.io");
 var io = socket_io();
 var socketService = require('./services/socketService')(io);
 
-mongoose.connect("mongodb://evelyn:hsl0054829531@ds059365.mlab.com:59365/coj");
+mongoose.connect(CONFIG.mongodb);
 
 app.use("/api/v1", restRouter);
 app.use('/', indexRouter);

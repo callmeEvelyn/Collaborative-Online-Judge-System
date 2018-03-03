@@ -19,7 +19,6 @@ export class DataService {
         this.problemsSource.next(res.json());
       })
       .catch(this.handleError);
-    //observable 实时更新
     return this.problemsSource.asObservable();
   }
 
